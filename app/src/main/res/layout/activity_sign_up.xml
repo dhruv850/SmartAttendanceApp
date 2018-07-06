@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+
+
+
+    <EditText
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:hint="name"
+android:id="@+id/uname"
+        />
+
+    <EditText
+        android:id="@+id/newUserName"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="180dp"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        />
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+android:layout_marginTop="240dp"
+        android:hint="password"
+        android:inputType="textPassword"
+        />
+    <EditText
+        android:id="@+id/cfmpassword"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+
+android:layout_marginTop="300dp"
+        android:hint="confirm password"
+        android:inputType="textPassword"
+        />
+    <Button
+        android:id="@+id/signupbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+android:layout_marginTop="440dp"
+        android:text="Sign Up"
+        />
+
+    <TextView
+        android:id="@+id/signinlink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+android:layout_marginTop="490dp"
+        android:text="Already Have An Account ? Log In"
+        />
+
+    <CheckBox
+        android:id="@+id/tnc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+
+        android:layout_marginTop="390dp"
+        android:text="I Agree With Terms And Conditions" />
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button msenddata;
     private EditText memail;
     private EditText mpassword;
+    private TextView msignup;
     private FirebaseAuth mauth;
     private FirebaseAuth.AuthStateListener mauthlistener;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         msenddata = (Button) findViewById(R.id.button1);
         memail = (EditText) findViewById(R.id.text1);
         mpassword = (EditText) findViewById(R.id.text2);
-
+        msignup = (TextView) findViewById(R.id.signuplink);
         mauthlistener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -51,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 startsignin();
 
 
+            }
+        });
+        msignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,SignUpActivity.class));
             }
         });
     }

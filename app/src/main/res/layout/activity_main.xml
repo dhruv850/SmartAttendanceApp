@@ -39,7 +39,14 @@ android:layout_below="@+id/text2"
     android:inputType="textPassword"
     />
 
-
+    <TextView
+        android:id="@+id/signuplink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="169dp"
+        android:text="Don't Have An Account ? Sign Up" />
 
 
 </android.widget.RelativeLayout>
