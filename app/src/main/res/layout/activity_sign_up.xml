@@ -18,6 +18,14 @@
         android:hint="name"
 android:id="@+id/uname"
         />
+<EditText
+    android:layout_width="215dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/enroll"
+    android:hint="Enrollment Number"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="70dp"
+    />
 
     <EditText
         android:id="@+id/newUserName"

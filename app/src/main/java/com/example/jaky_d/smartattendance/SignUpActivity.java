@@ -1,5 +1,6 @@
 package com.example.jaky_d.smartattendance;
 
+import android.app.Notification;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,6 +21,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -29,6 +33,8 @@ public class SignUpActivity extends AppCompatActivity {
     private Button signUp;
     private TextView signInLink;
     private CheckBox tnc;
+    private int userid;
+    private EditText f4;
 
     private FirebaseAuth mAuth;
 
@@ -38,16 +44,28 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        final DatabaseReference myRootRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Users");
         f1 = (EditText) findViewById(R.id.newUserName);
         f2 = (EditText) findViewById(R.id.newPassword);
         signUp = (Button) findViewById(R.id.signupbtn);
         signInLink = (TextView) findViewById(R.id.signinlink);
         tnc = (CheckBox) findViewById(R.id.tnc);
         f3 = (EditText) findViewById(R.id.cfmpassword);
+        f4 = (EditText) findViewById(R.id.enroll);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startSignup();
+                String Enrollment = f4.getText().toString();
+                String email = f1.getText().toString();
+                String pass = f2.getText().toString();
+                DatabaseReference user = myRootRef.child(Enrollment);
+                user.child("Email").setValue(email);
+                user.child("Password").setValue(pass);
+
+
+
+
             }
         });
 
@@ -61,9 +79,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void startSignup() {
-        String email = f1.getText().toString();
-        String password = f2.getText().toString();
+        final String email = f1.getText().toString();
+        final String password = f2.getText().toString();
         String ConfirmPassword = f3.getText().toString();
+
+
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(SignUpActivity.this, "Please enter Email ID or password", Toast.LENGTH_SHORT).show();
         } else {
@@ -73,6 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                                     Toast.makeText(SignUpActivity.this, "Account Created!", Toast.LENGTH_SHORT).show();
                                     if (!task.isSuccessful()) {
                                         Toast.makeText(SignUpActivity.this, "Please try again!", Toast.LENGTH_SHORT).show();
