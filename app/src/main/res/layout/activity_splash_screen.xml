@@ -8,4 +8,20 @@
     android:background="@color/colorPrimary"
     >
 
+
+    <ProgressBar
+        android:id="@+id/splash_screen_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/splash_screen_progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="5dp"
+        android:paddingBottom="30dp"
+        android:layout_marginRight="10dp"
+        android:maxWidth="35dip"
+        android:maxHeight="35dip"
+        android:progressDrawable="@drawable/barprogress"
+
+        />
 </RelativeLayout>
