@@ -4,87 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".SignUpActivity">
 
-
-
-
     <EditText
+        android:id="@+id/uname"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:hint="name"
-android:id="@+id/uname"
-        />
-<EditText
-    android:layout_width="215dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/enroll"
-    android:hint="Enrollment Number"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="70dp"
-    />
+        android:layout_marginTop="130dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_corner_edittext"
+        android:hint="name" />
+
+    <EditText
+        android:id="@+id/enroll"
+        android:layout_width="215dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_corner_edittext"
+        android:hint="Enrollment Number" />
 
     <EditText
         android:id="@+id/newUserName"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="182dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_corner_edittext"
         android:hint="email"
-        android:inputType="textEmailAddress"
-        />
+        android:inputType="textEmailAddress" />
+
     <EditText
         android:id="@+id/newPassword"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-android:layout_marginTop="240dp"
+        android:layout_marginTop="237dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_corner_edittext"
         android:hint="password"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword" />
+
     <EditText
         android:id="@+id/cfmpassword"
         android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_height="37dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-
-android:layout_marginTop="300dp"
+        android:layout_marginBottom="232dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_corner_edittext"
         android:hint="confirm password"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword" />
+
     <Button
         android:id="@+id/signupbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-android:layout_marginTop="440dp"
+        android:layout_marginBottom="84dp"
+        android:background="@drawable/button_background"
         android:text="Sign Up"
-        />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/signinlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-android:layout_marginTop="490dp"
-        android:text="Already Have An Account ? Log In"
-        />
+        android:layout_marginBottom="48dp"
+        android:text="Already Have An Account ? Log In" />
 
     <CheckBox
         android:id="@+id/tnc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-
-        android:layout_marginTop="390dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="149dp"
         android:text="I Agree With Terms And Conditions" />
 </RelativeLayout>
