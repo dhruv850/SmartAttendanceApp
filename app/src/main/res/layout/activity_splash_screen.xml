@@ -5,10 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/activity_background"
     >
 
-
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="350dp"
+        android:layout_height="204dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="137dp"
+        android:background="@drawable/round_corner_edittext"
+        android:src="@mipmap/ic_launcher" />
+    
     <ProgressBar
         android:id="@+id/splash_screen_progressbar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -22,5 +30,6 @@
 
         android:paddingBottom="30dp"
         android:paddingLeft="5dp"
-        android:progressDrawable="@drawable/barprogress" />
+        android:progressDrawable="@drawable/barprogress" 
+    />
 </RelativeLayout>
