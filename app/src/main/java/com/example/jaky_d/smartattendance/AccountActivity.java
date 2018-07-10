@@ -10,18 +10,27 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountActivity extends AppCompatActivity {
-private Button logOut;
+private Button logOut,att;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         logOut = (Button) findViewById(R.id.logoutbtn);
+        att = (Button) findViewById(R.id.attendance);
+
        logOut.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                FirebaseAuth.getInstance().signOut();
                startActivity(new Intent(AccountActivity.this,MainActivity.class));
                Toast.makeText(AccountActivity.this, "Logged Out Successfully!", Toast.LENGTH_SHORT).show();
+           }
+       });
+
+       att.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(AccountActivity.this,GeofenceActivity.class));
            }
        });
     }

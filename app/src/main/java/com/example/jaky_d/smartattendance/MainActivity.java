@@ -2,6 +2,7 @@ package com.example.jaky_d.smartattendance;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -72,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void startsignin()
     {
-        String email = memail.getText().toString();
-        String password = mpassword.getText().toString();
+        final String email = memail.getText().toString();
+        final String password = mpassword.getText().toString();
 
         if(TextUtils.isEmpty(email)|| TextUtils.isEmpty(password))
         {
@@ -84,7 +85,10 @@ Toast.makeText(MainActivity.this,"Field Are Empty",Toast.LENGTH_LONG).show();
         mauth.signInWithEmailAndPassword(email , password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
+                Intent intent = new Intent(getApplicationContext(), TrackingService.class);
+                Intent i = new Intent(intent).putExtra("passEmail", email);
+                i.putExtra("passPwd",password);
+                LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(i);
                 if(!task.isSuccessful())
                 {
                     Toast.makeText(MainActivity.this,"Sign In Problem",Toast.LENGTH_LONG).show();
