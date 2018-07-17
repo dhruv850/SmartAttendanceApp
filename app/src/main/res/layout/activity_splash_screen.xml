@@ -16,7 +16,7 @@
         android:layout_marginTop="137dp"
         android:background="@drawable/round_corner_edittext"
         android:src="@mipmap/ic_launcher" />
-    
+
     <ProgressBar
         android:id="@+id/splash_screen_progressbar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"

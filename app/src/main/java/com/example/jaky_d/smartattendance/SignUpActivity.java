@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private CheckBox tnc;
     private int userid;
     private EditText f4;
-
+private String UID;
     private FirebaseAuth mAuth;
 
     @Override
@@ -44,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+
         final DatabaseReference myRootRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Users");
         f1 = (EditText) findViewById(R.id.newUserName);
         f2 = (EditText) findViewById(R.id.newPassword);
@@ -57,16 +59,18 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startSignup();
                 String Enrollment = f4.getText().toString();
+
                 String email = f1.getText().toString();
                 String pass = f2.getText().toString();
                 DatabaseReference user = myRootRef.child(Enrollment);
                 user.child("Email").setValue(email);
                 user.child("Password").setValue(pass);
-
-
+                Intent i=new Intent(SignUpActivity.this,AccountActivity.class);
+                i.putExtra("id",Enrollment);
 
 
             }
+
         });
 
         signInLink.setOnClickListener(new View.OnClickListener() {
