@@ -65,8 +65,7 @@ private String UID;
                 DatabaseReference user = myRootRef.child(Enrollment);
                 user.child("Email").setValue(email);
                 user.child("Password").setValue(pass);
-                Intent i=new Intent(SignUpActivity.this,AccountActivity.class);
-                i.putExtra("id",Enrollment);
+
 
 
             }
