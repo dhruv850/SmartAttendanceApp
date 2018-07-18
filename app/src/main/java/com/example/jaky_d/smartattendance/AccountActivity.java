@@ -69,7 +69,7 @@ import java.util.Map;
 
 
 public class AccountActivity extends AppCompatActivity {
-
+private TextView txtLocationResult;
     private Button logOut;
     private static final int REQUEST_CODE = 1000;
     TextView txt_location,lotlgt;
@@ -79,13 +79,14 @@ public class AccountActivity extends AppCompatActivity {
     LocationCallback locationCallback;
     private String lt;
     private String lg;
-    private Double clot;
-    private Double clgt;
+    private Double classlot;
+    private Double classlgt;
     private Double lot;
     private Double lgt;
     private Location mCurrentLocation;
     FirebaseAuth mauth;
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Classes/SE11");
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Classes/SE11/");
+    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Attendance/150170107022");
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -112,7 +113,7 @@ lotlgt = (TextView) findViewById(R.id.clotlgt);
         btn_start = (Button) findViewById(R.id.btn_start_updates);
         btn_stop = (Button) findViewById(R.id.btn_stop_updates);
 
-
+txtLocationResult = (TextView)findViewById(R.id.location_result);
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
@@ -128,9 +129,9 @@ lotlgt = (TextView) findViewById(R.id.clotlgt);
                     String Longitude = map.get ("longitude");
                     Log.v("E_Value","latitude :"+ Latitude);
                     Log.v("E_Value","longitude :"+ Longitude);
-                    clot = Double.parseDouble(Latitude);
-                    clgt = Double.parseDouble(Longitude);
-                    lotlgt.setText(clot+"/"+clgt);
+                    classlot = Double.parseDouble(Latitude);
+                    classlgt = Double.parseDouble(Longitude);
+                    lotlgt.setText(classlot+"/"+classlgt);
                 }
 
                 @Override
@@ -198,5 +199,42 @@ lotlgt = (TextView) findViewById(R.id.clotlgt);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(3000);
         locationRequest.setSmallestDisplacement(10);
+    }
+
+    public void markAttendance(View view) {
+        double clot = lot;
+        double clgt = lgt;
+        double lott;
+        double lgtt;
+         lott = classlot;
+        lgtt = classlgt;
+        Location ol=new Location(mCurrentLocation);
+        ol.setLatitude(lott);
+        ol.setLongitude(lgtt);
+
+        double x1, x2, y1, y2;
+        double meters = 20;
+        double coef = meters * 0.0000089;
+        x1 = lott + coef;
+        y1 = lgtt + coef / Math.cos(lott * 0.018);
+        x2 = lott - coef;
+        y2 = lgtt - coef / Math.cos(lott * 0.018);
+      /*  if(((clot>=x2)&&(clot<=x1))&&((clgt>=y2)&&(clgt<=y1))){
+
+
+            txtLocationResult.setText("attendance marked");
+
+    } */
+        double distance = Math.sqrt(Math.pow((lott - clot), 2));
+        double distance2= mCurrentLocation.distanceTo(ol);
+  /*  float[] distance3 = new float[1];
+    Location.distanceBetween(lott, lgtt, clot, clgt, distance3);*/
+        String s=String.valueOf(distance2);
+        Log.i("distance",s);
+        if (distance2 <= 10) {
+            txtLocationResult.setText("attendance marked");
+        } else {
+            txtLocationResult.setText("attendance cant be marked");
+        }
     }
 }

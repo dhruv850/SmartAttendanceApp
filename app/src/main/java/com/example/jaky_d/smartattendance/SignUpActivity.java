@@ -63,8 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = f1.getText().toString();
                 String pass = f2.getText().toString();
                 DatabaseReference user = myRootRef.child(Enrollment);
-                user.child("Email").setValue(email);
-                user.child("Password").setValue(pass);
+                user.push().child("Email").setValue(email);
+                user.push().child("Password").setValue(pass);
 
 
 
