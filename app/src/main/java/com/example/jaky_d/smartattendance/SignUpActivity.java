@@ -16,7 +16,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -63,9 +62,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String email = f1.getText().toString();
                 String pass = f2.getText().toString();
                 DatabaseReference user = myRootRef.child(Enrollment);
-                user.push().child("Email").setValue(email);
-                user.push().child("Password").setValue(pass);
-
+                user.child("Email").setValue(email);
+                user.child("Password").setValue(pass);
 
 
             }

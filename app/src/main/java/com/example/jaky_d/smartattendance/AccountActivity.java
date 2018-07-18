@@ -1,6 +1,7 @@
 package com.example.jaky_d.smartattendance;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,22 +52,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Calendar;
 
 public class AccountActivity extends AppCompatActivity {
 private TextView txtLocationResult;
@@ -84,9 +83,12 @@ private TextView txtLocationResult;
     private Double lot;
     private Double lgt;
     private Location mCurrentLocation;
-    FirebaseAuth mauth;
+    FirebaseAuth mAuth;
+private Boolean T;
+
     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Classes/SE11/");
-    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Attendance/150170107022");
+    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Attendance");
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -104,9 +106,24 @@ private TextView txtLocationResult;
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(AccountActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+
         logOut = (Button) findViewById(R.id.logoutbtn);
 lotlgt = (TextView) findViewById(R.id.clotlgt);
         txt_location = (TextView) findViewById(R.id.txt_location);
@@ -132,6 +149,7 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
                     classlot = Double.parseDouble(Latitude);
                     classlgt = Double.parseDouble(Longitude);
                     lotlgt.setText(classlot+"/"+classlgt);
+
                 }
 
                 @Override
@@ -143,11 +161,8 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
             btn_start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(AccountActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-                        return;
-                    }
-                    fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+
+
                     btn_start.setEnabled(!btn_start.isEnabled());
                     btn_stop.setEnabled(!btn_stop.isEnabled());
                 }
@@ -232,9 +247,20 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
         String s=String.valueOf(distance2);
         Log.i("distance",s);
         if (distance2 <= 10) {
+            T=true;
             txtLocationResult.setText("attendance marked");
         } else {
             txtLocationResult.setText("attendance cant be marked");
+            T=false;
         }
+        FirebaseUser user = mAuth.getCurrentUser();
+        String UID= user.getUid();
+        Log.d(UID,"User ID");
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        Log.d(strDate,"Current Date");
+        DatabaseReference user1 = ref1.child(UID);
+        user1.child(strDate).setValue(T);
     }
 }

@@ -18,5 +18,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-
+    <string name="location">"Location updates will be received only when app is foreground"</string>
+    <string name="logout">"logout"</string>
 </resources>

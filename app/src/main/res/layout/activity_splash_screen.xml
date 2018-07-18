@@ -8,14 +8,14 @@
     android:background="@drawable/activity_background"
     >
 
-    <android.support.v7.widget.AppCompatImageView
+    <ImageView
         android:layout_width="350dp"
         android:layout_height="204dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="137dp"
         android:background="@drawable/round_corner_edittext"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <ProgressBar
         android:id="@+id/splash_screen_progressbar"
