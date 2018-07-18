@@ -1,65 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="@mipmap/homepage_1"
     android:orientation="vertical"
-    tools:context=".AccountActivity">
+    tools:context=".AccountActivity"
+    android:background="@mipmap/homepage_1">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="116dp"
+        android:layout_marginTop="19dp"
+        android:src="@mipmap/logo" />
 
-    <Button
-        android:id="@+id/btn_start_location_updates"
-        android:layout_width="200dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/start_updates"
-        android:background="@drawable/round_corner_edittext"/>
-
-    <Button
-        android:id="@+id/btn_stop_location_updates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:enabled="false"
-        android:text="@string/stop_updates" />
-
-    <Button
-        android:id="@+id/btn_get_last_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/get_last_location" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        android:text="Location updates will be received only when app is foreground" />
-
-    <TextView
-        android:id="@+id/location_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:textColor="#333"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/updated_on"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textSize="11dp" />
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        >
 
 
-    <Button
-        android:id="@+id/logoutbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Logout" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_location"
+            android:text="0.0/0.0"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp"
 
-</LinearLayout>
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_start_updates"
+            android:text="@string/start_updates"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_stop_updates"
+            android:text="@string/stop_updates"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:enabled="false"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
+            />
+
+        <Button
+            android:id="@+id/btn_markAttendance"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/mark_attendance"
+            android:onClick="markAttendance"
+            android:background="@drawable/mrk_attn_bttn"
+            android:layout_marginTop="10dp"
+         />
+
+
+        <Button
+            android:id="@+id/logoutbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/logout"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/location_result"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/clotlgt"
+            android:text="0.0/0.0"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
