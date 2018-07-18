@@ -45,8 +45,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -68,17 +72,20 @@ public class AccountActivity extends AppCompatActivity {
 
     private Button logOut;
     private static final int REQUEST_CODE = 1000;
-    TextView txt_location;
+    TextView txt_location,lotlgt;
     Button btn_start, btn_stop;
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
     LocationCallback locationCallback;
     private String lt;
     private String lg;
+    private Double clot;
+    private Double clgt;
     private Double lot;
     private Double lgt;
-private Location mCurrentLocation;
-FirebaseAuth mauth;
+    private Location mCurrentLocation;
+    FirebaseAuth mauth;
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Classes/SE11");
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -100,7 +107,7 @@ FirebaseAuth mauth;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         logOut = (Button) findViewById(R.id.logoutbtn);
-
+lotlgt = (TextView) findViewById(R.id.clotlgt);
         txt_location = (TextView) findViewById(R.id.txt_location);
         btn_start = (Button) findViewById(R.id.btn_start_updates);
         btn_stop = (Button) findViewById(R.id.btn_stop_updates);
@@ -112,6 +119,26 @@ FirebaseAuth mauth;
             buildLocationRequest();
             buildLocationCallBack();
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    GenericTypeIndicator<Map<String, String>> genericTypeIndicator = new GenericTypeIndicator<Map<String, String>>() {};
+                    Map<String, String> map = dataSnapshot.getValue(genericTypeIndicator );
+                    String Latitude = map.get ("latitude");
+                    String Longitude = map.get ("longitude");
+                    Log.v("E_Value","latitude :"+ Latitude);
+                    Log.v("E_Value","longitude :"+ Longitude);
+                    clot = Double.parseDouble(Latitude);
+                    clgt = Double.parseDouble(Longitude);
+                    lotlgt.setText(clot+"/"+clgt);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             btn_start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

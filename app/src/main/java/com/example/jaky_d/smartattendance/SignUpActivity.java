@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private CheckBox tnc;
     private int userid;
     private EditText f4;
-private String UID;
+    private String UID;
     private FirebaseAuth mAuth;
 
     @Override
@@ -111,7 +111,7 @@ private String UID;
                     Toast.makeText(SignUpActivity.this, "Please accept terms and condition!", Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(SignUpActivity.this, "Password Do Not Match", Toast.LENGTH_SHORT).show();
-}
+        }
     } //end of fn
 }
 
