@@ -9,13 +9,13 @@
     >
 
     <ImageView
-        android:layout_width="350dp"
+        android:layout_width="322dp"
         android:layout_height="204dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="137dp"
-        android:background="@drawable/round_corner_edittext"
-        android:src="@mipmap/ic_launcher_round" />
+
+        android:layout_marginTop="138dp"
+        android:src="@mipmap/logo" />
 
     <ProgressBar
         android:id="@+id/splash_screen_progressbar"
@@ -30,6 +30,6 @@
 
         android:paddingBottom="30dp"
         android:paddingLeft="5dp"
-        android:progressDrawable="@drawable/barprogress" 
-    />
+        android:progressDrawable="@drawable/barprogress"
+        />
 </RelativeLayout>

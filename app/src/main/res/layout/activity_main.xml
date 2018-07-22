@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="105dp"
         android:layout_marginTop="54dp"
-       />
+        android:src="@mipmap/logo" />
 
 
     <EditText

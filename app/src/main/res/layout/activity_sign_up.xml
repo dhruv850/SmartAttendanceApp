@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="114dp"
         android:layout_marginTop="23dp"
-      />
+        android:src="@mipmap/logo" />
 
 
 
@@ -56,9 +56,9 @@
         android:id="@+id/newPassword"
         android:layout_width="215dp"
         android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="265dp"
+        android:layout_marginTop="265dp"
         android:background="@drawable/round_corner_edittext"
         android:hint="password"
         android:inputType="textPassword"
@@ -68,9 +68,9 @@
         android:id="@+id/cfmpassword"
         android:layout_width="215dp"
         android:layout_height="37dp"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="222.5dp"
+       android:layout_marginTop="305dp"
         android:background="@drawable/round_corner_edittext"
         android:hint="confirm password"
         android:inputType="textPassword"

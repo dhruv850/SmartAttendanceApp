@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#68f4f2</color>
-    <color name="colorPrimaryDark">#6f759f</color>
+    <color name="colorPrimary">#bdc6bc</color>
+    <color name="colorPrimaryDark">#589f53</color>
     <color name="colorAccent">#f95d92</color>
     <color name="edittext">#ffffff</color>
     <color name="Bttn_background">#3e8cec</color>
+
 </resources>

@@ -105,15 +105,7 @@ private Boolean T;
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(AccountActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
-    }
+   
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -162,7 +154,11 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
                 @Override
                 public void onClick(View view) {
 
-
+                    if (ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AccountActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(AccountActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+                        return;
+                    }
+                    fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
                     btn_start.setEnabled(!btn_start.isEnabled());
                     btn_stop.setEnabled(!btn_stop.isEnabled());
                 }

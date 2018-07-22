@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".AccountActivity">
+    tools:context=".AccountActivity"
+    android:background="@mipmap/homepage_1">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="116dp"
+        android:layout_marginTop="19dp"
+        android:src="@mipmap/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +24,8 @@
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
         >
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,33 +39,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_start_updates"
-            android:text="start Updates"
+            android:text="@string/start_updates"
             style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
             />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_stop_updates"
-            android:text="stop Updates"
+            android:text="@string/stop_updates"
             style="@style/Widget.AppCompat.Button.Colored"
             android:enabled="false"
-
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
             />
+
+        <Button
+            android:id="@+id/btn_markAttendance"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/mark_attendance"
+            android:onClick="markAttendance"
+            android:background="@drawable/mrk_attn_bttn"
+            android:layout_marginTop="10dp"
+            />
+
+
         <Button
             android:id="@+id/logoutbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Logout" />
-        <Button
-            android:id="@+id/btn_markAttendance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-
-            android:text="@string/mark_attendance"
-            android:onClick="markAttendance"
+            android:text="@string/logout"
+            android:background="@drawable/button_background"
+            android:layout_marginTop="10dp"
             />
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
