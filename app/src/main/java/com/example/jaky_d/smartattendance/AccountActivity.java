@@ -105,7 +105,7 @@ private Boolean T;
         }
     }
 
-   
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -242,7 +242,7 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
     Location.distanceBetween(lott, lgtt, clot, clgt, distance3);*/
         String s=String.valueOf(distance2);
         Log.i("distance",s);
-        if (distance2 <= 10) {
+        if (distance2 <= 5) {
             T=true;
             txtLocationResult.setText("attendance marked");
         } else {
