@@ -68,7 +68,7 @@ import java.util.Map;
 import java.util.Calendar;
 
 public class AccountActivity extends AppCompatActivity {
-private TextView txtLocationResult;
+    private TextView txtLocationResult;
     private Button logOut;
     private static final int REQUEST_CODE = 1000;
     TextView txt_location,lotlgt;
@@ -84,10 +84,13 @@ private TextView txtLocationResult;
     private Double lgt;
     private Location mCurrentLocation;
     FirebaseAuth mAuth;
-private Boolean T;
+    private Boolean T;
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Classes/SE11/");
     DatabaseReference ref1 = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Attendance");
+    DatabaseReference ref2 = FirebaseDatabase.getInstance().getReferenceFromUrl("https://smartattendance-c896a.firebaseio.com/Users/");
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -117,12 +120,12 @@ private Boolean T;
         mAuth = FirebaseAuth.getInstance();
 
         logOut = (Button) findViewById(R.id.logoutbtn);
-lotlgt = (TextView) findViewById(R.id.clotlgt);
+        lotlgt = (TextView) findViewById(R.id.clotlgt);
         txt_location = (TextView) findViewById(R.id.txt_location);
         btn_start = (Button) findViewById(R.id.btn_start_updates);
         btn_stop = (Button) findViewById(R.id.btn_stop_updates);
 
-txtLocationResult = (TextView)findViewById(R.id.location_result);
+        txtLocationResult = (TextView)findViewById(R.id.location_result);
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
@@ -217,7 +220,7 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
         double clgt = lgt;
         double lott;
         double lgtt;
-         lott = classlot;
+        lott = classlot;
         lgtt = classlgt;
         Location ol=new Location(mCurrentLocation);
         ol.setLatitude(lott);
@@ -231,10 +234,7 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
         x2 = lott - coef;
         y2 = lgtt - coef / Math.cos(lott * 0.018);
       /*  if(((clot>=x2)&&(clot<=x1))&&((clgt>=y2)&&(clgt<=y1))){
-
-
             txtLocationResult.setText("attendance marked");
-
     } */
         double distance = Math.sqrt(Math.pow((lott - clot), 2));
         double distance2= mCurrentLocation.distanceTo(ol);
@@ -252,11 +252,12 @@ txtLocationResult = (TextView)findViewById(R.id.location_result);
         FirebaseUser user = mAuth.getCurrentUser();
         String UID= user.getUid();
         Log.d(UID,"User ID");
+        String cl_name = "CE122";
         Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
         Log.d(strDate,"Current Date");
         DatabaseReference user1 = ref1.child(UID);
-        user1.child(strDate).setValue(T);
+        user1.child(cl_name).child(strDate).setValue(T);
     }
 }
