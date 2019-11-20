@@ -35,26 +35,16 @@
             android:textSize="30sp"
 
             />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_start_updates"
-            android:text="@string/start_updates"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="10dp"
-            />
 
-        <Button
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_stop_updates"
-            android:text="@string/stop_updates"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:enabled="false"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_height="200dp"
+            tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
         <Button
             android:id="@+id/btn_markAttendance"
@@ -65,6 +55,12 @@
             android:onClick="markAttendance"
             android:background="@drawable/mrk_attn_bttn"
             android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/location_result"
             />
 
 
@@ -79,19 +75,8 @@
             />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/location_result"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/clotlgt"
-            android:text="0.0/0.0"
-            android:layout_gravity="center_horizontal"
-            />
+
+
 
     </LinearLayout>
 

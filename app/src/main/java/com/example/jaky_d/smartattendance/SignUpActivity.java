@@ -3,6 +3,16 @@ package com.example.jaky_d.smartattendance;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.util.AttributeSet;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 

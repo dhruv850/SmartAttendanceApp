@@ -21,6 +21,7 @@
         android:theme="@style/Theme.AppCompat.Light"
         android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         tools:replace="android:appComponentFactory">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <activity
             android:name=".MainActivity"
@@ -31,6 +32,12 @@
             android:value="@integer/google_play_services_version" />
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
