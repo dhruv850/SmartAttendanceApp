@@ -11,30 +11,29 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="150dp"
         android:layout_marginTop="19dp"
         android:src="@mipmap/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="700dp"
+        android:paddingTop="100dp"
         android:orientation="vertical"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
         >
-
-
         <TextView
+            android:id="@+id/txt_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_location"
-            android:text="0.0/0.0"
             android:layout_gravity="center_horizontal"
-            android:textSize="30sp"
+            android:text="0.0/0.0"
 
-            />
+            android:textSize="30sp" />
 
 
 
@@ -43,12 +42,12 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="350dp"
             tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
         <Button
             android:id="@+id/btn_markAttendance"
-            android:layout_width="170dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/mark_attendance"
@@ -60,25 +59,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
             android:id="@+id/location_result"
             />
-
-
         <Button
             android:id="@+id/logoutbtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="55dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/logout"
             android:background="@drawable/button_background"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom= "true"
             />
+
 
 
 
 
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

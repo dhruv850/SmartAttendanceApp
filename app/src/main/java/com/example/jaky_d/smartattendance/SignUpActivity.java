@@ -1,6 +1,8 @@
 package com.example.jaky_d.smartattendance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 import android.app.AlertDialog;
@@ -14,7 +16,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import android.content.Intent;
-import androidx.annotation.NonNull;
+//import androidx.annotation.NonNull;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -99,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
+
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     Toast.makeText(SignUpActivity.this, "Account Created!", Toast.LENGTH_SHORT).show();

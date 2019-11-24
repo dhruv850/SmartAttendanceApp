@@ -125,6 +125,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
     private Location mLastKnownLocation;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
+    private String d;
     private String lt;
     private String lg;
     private Double classlot;
@@ -205,7 +206,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
 
 
 
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -214,7 +215,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
                     //Do something after 100ms
                     GetClass();
                 }
-            }, 2000);
+            }, 5000);
 
 
 
@@ -255,8 +256,39 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
     /**
+     *
+
      * Saves the state of the map when the activity is paused.
      */
+    Handler handler = new Handler();
+    Runnable runnable;
+    int delay = 4*1000; //Delay for 15 seconds.  One second = 1000 milliseconds.
+
+
+    @Override
+    protected void onResume() {
+        //start handler as activity become visible
+
+        handler.postDelayed( runnable = new Runnable() {
+            public void run() {
+                //do something
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
+
+                handler.postDelayed(runnable, delay);
+            }
+        }, delay);
+
+        super.onResume();
+    }
+
+// If onPause() is not included the threads will double up when you
+// reload the activity
+
+    @Override
+    protected void onPause() {
+        handler.removeCallbacks(runnable); //stop handler when activity not visible
+        super.onPause();
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (mMap != null) {
@@ -273,7 +305,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
         // and move the map's camera to the same location.
         //LatLng sydney = new LatLng(-33.852, 151.211);
         //googleMap.addMarker(new MarkerOptions().position(sydney)
-          //      .title("Marker in Sydney"));
+        //      .title("Marker in Sydney"));
         //googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         final Handler handler = new Handler();
@@ -291,6 +323,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
      * Gets the current location of the device, and positions the map's camera.
      */
     private void getDeviceLocation() {
+
         /*
          * Get the best and most recent location of the device, which may be null in rare
          * cases when a location is not available.
@@ -302,6 +335,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
                     @Override
                     public void onComplete(@NonNull Task<Location> task) {
                         if (task.isSuccessful()) {
+
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -317,7 +351,12 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
                     }
                 });
             }
-        } catch (SecurityException e)  {
+
+        }
+        catch(
+                SecurityException e)
+
+        {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -364,7 +403,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
-                       // dialog.cancel();
+                        // dialog.cancel();
                         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
                         homeIntent.addCategory( Intent.CATEGORY_HOME );
                         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -486,7 +525,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(3000);
-        locationRequest.setSmallestDisplacement(10);
+        locationRequest.setSmallestDisplacement(8);
     }
 
     public boolean checkUserDistance(double classLat,double classLgt){
@@ -510,11 +549,23 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
       /*  if(((clot>=x2)&&(clot<=x1))&&((clgt>=y2)&&(clgt<=y1))){
             txtLocationResult.setText("attendance marked");
     } */
-        double distance = Math.sqrt(Math.pow((lott - clot), 2));
-        double distance2= mCurrentLocation.distanceTo(ol);
-        String d = Double.toString(distance2);
+        double c =
+                Math.sin(Math.toRadians(clot)) *
+                        Math.sin(Math.toRadians(lott)) +
+                        Math.cos(Math.toRadians(clot)) *
+                                Math.cos(Math.toRadians(lott)) *
+                                Math.cos(Math.toRadians(lgtt) -
+                                        Math.toRadians(clgt));
+        c = c > 0 ? Math.min(1, c) : Math.max(-1, c);
+        double e = 3959 * 1.609 * 1000 * Math.acos(c);
+        // double distance = Math.sqrt(Math.pow((lott - clot), 2));
+        //  double distance2= mCurrentLocation.distanceTo(ol);
+        d = Double.toString(e);
+
+
         Log.d("Distance",d);
-        if (distance2 <= 15) {
+
+        if (e <= 5) {
             return true;
         }else{
             return false;
@@ -531,6 +582,14 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
         Location ol=new Location(mCurrentLocation);
         ol.setLatitude(lott);
         ol.setLongitude(lgtt);
+  double clot = mCurrentLocation.getLatitude();
+        double clgt = mCurrentLocation.getLongitude();
+        double lott = classLat;
+        double lgtt = classLgt;
+
+        Location ol=new Location(mCurrentLocation);
+        ol.setLatitude(lott);
+        ol.setLongitude(lgtt);
 
         double x1, x2, y1, y2;
         double meters = 20;
@@ -538,7 +597,11 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
         x1 = lott + coef;
         y1 = lgtt + coef / Math.cos(lott * 0.018);
         x2 = lott - coef;
-        y2 = lgtt - coef / Math.cos(lott * 0.018);*/
+        y2 = lgtt - coef / Math.cos(lott * 0.018);
+      /*  if(((clot>=x2)&&(clot<=x1))&&((clgt>=y2)&&(clgt<=y1))){
+            txtLocationResult.setText("attendance marked");
+    } */
+
       /*  if(((clot>=x2)&&(clot<=x1))&&((clgt>=y2)&&(clgt<=y1))){
             txtLocationResult.setText("attendance marked");
     } */
@@ -548,6 +611,7 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
     Location.distanceBetween(lott, lgtt, clot, clgt, distance3);*/
         /*String s=String.valueOf(distance2);
         Log.i("distance",s);*/
+        GetClass();
         if (userClassName.length()>0) {
             T=true;
             FirebaseUser user = mAuth.getCurrentUser();
@@ -561,10 +625,14 @@ public class AccountActivity extends AppCompatActivity implements OnMapReadyCall
             DatabaseReference user1 = ref1.child(UID);
             user1.child(cl_name).child(strDate).setValue(T);
             txtLocationResult.setText("Attendance marked for "+userClassName);
+            Log.d("Distance",d);
+
         } else {
             txtLocationResult.setText("Attendance can't be marked for any Class");
+            Log.d("Distance",d);
             T=false;
         }
+        userClassName="";
 
     }
 }
